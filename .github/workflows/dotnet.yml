@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ netstandard-eddsa ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build:
 
@@ -40,4 +44,4 @@ jobs:
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
         echo API key ${{secrets.NUGET_TOKEN}}
-        dotnet nuget push crypto/src/bin/Release/*.nupkg -s github -k ${{secrets.NUGET_TOKEN}}
+#        dotnet nuget push crypto/src/bin/Release/*.nupkg -s github -k ${{secrets.NUGET_TOKEN}}
