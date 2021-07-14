@@ -43,8 +43,8 @@ jobs:
     - name: Publish
       env:
         token1: ${{ secrets.NUGET_TOKEN }}
-        token2: ${{ github.token }}
+        token2: "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"
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
-        echo API key ${{ github.token }} $token2
-        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.1.8.10.52.nupkg -s github -k ${{ github.token }}
+        echo API key $token1 $token2
+        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.1.8.10.53.nupkg -s github -k $token2
