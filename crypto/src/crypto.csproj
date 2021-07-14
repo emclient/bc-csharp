@@ -21,7 +21,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <NoWarn>1591;618;672</NoWarn>
-    <RepositoryUrl>https://nuget.pkg.github.com/emclient/index.json</RepositoryUrl>
+    <RepositoryUrl>https://github.com/emclient/bc-csharp.git</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
