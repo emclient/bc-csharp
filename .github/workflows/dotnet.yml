@@ -41,7 +41,7 @@ jobs:
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
     - name: Publish
-      with:
+      env:
         token: ${{ secrets.GITHUB_TOKEN }}
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
