@@ -13,7 +13,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -42,9 +42,8 @@ jobs:
       run: dotnet pack crypto/src --configuration Release
     - name: Publish
       env:
-        token1: ${{ secrets.NUGET_TOKEN }}
-        token2: "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"
+        token: ${{ secrets.NUGET_TOKEN }}
       run: |
-        dotnet nuget add source https://nuget.pkg.github.com/emclient -n github --username ${{ github.repository_owner }} --password ${{ github.token }} --store-password-in-clear-text
-        echo API key $token1 $token2
-        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.1.8.10.57.nupkg -s github
+        dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
+        echo API key $token1 ${{ secrets.NUGET_TOKEN }}
+        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.1.8.10.58.nupkg -s github --api-key ${{ secrets.NUGET_TOKEN }}
