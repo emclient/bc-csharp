@@ -46,4 +46,4 @@ jobs:
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
         echo API key $token1 ${{ secrets.GITHUB_TOKEN }}
-        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.1.8.10.62.nupkg -s github --api-key ${{ secrets.GITHUB_TOKEN }}
+        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.1.8.10.63.nupkg -s github --api-key INVALID_API_KEY
