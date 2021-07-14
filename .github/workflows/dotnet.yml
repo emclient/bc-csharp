@@ -37,4 +37,6 @@ jobs:
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
     - name: Publish
-      run: dotnet nuget push crypto/src/bin/Release/*.nupkg -s nuget.org -k ${{secrets.NUGET_TOKEN}}
+      run: |
+        dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
+        dotnet nuget push crypto/src/bin/Release/*.nupkg -s github -k ${{secrets.NUGET_TOKEN}}
