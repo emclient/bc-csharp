@@ -33,4 +33,4 @@ jobs:
         path: "**/TestResults/*.trx"
         reporter: dotnet-trx
     - name: Pack
-      run: dotnet pack
+      run: dotnet pack crypto
