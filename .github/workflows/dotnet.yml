@@ -46,5 +46,5 @@ jobs:
         token2: ${{ github.token }}
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
-        echo API key $token1 $token2
-        dotnet nuget push crypto/src/bin/Release/*.nupkg -s github -k $token2
+        echo API key ${{ github.token }} $token2
+        dotnet nuget push crypto/src/bin/Release/*.nupkg -s github -k ${{ github.token }}
