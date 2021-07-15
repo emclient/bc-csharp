@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
 #    - name: Build crypto
@@ -36,11 +36,6 @@ jobs:
       with:
         name: build-artifacts
         path: crypto/src/bin
-
-#  tests:
-#    needs: build
-#    runs-on: windows-latest
-#    steps:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
@@ -57,7 +52,7 @@ jobs:
       packages: write
 
     needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
@@ -67,9 +62,9 @@ jobs:
         name: build-artifacts
         path: crypto/src/bin
     - name: Pack
-      run: dotnet pack crypto/src --configuration Release
+      run: dotnet pack crypto/src --configuration Release --no-build
     - name: Publish
-#      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' }}
       env:
         token: ${{ secrets.GITHUB_TOKEN }}
       run: |
