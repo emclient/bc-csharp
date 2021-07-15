@@ -35,7 +35,7 @@ jobs:
       if: success() || failure()
       with:
         name: "test results"
-        path: "**/TestResults/*.trx"
+        path: crypto\test\TestResults\test-results.trx
         reporter: dotnet-trx
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
