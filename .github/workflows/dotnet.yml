@@ -6,14 +6,9 @@ on:
   pull_request:
     branches: [ netstandard-eddsa ]
 
-#permissions:
-#  packages: write
-
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -21,22 +16,15 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 3.1.x
     - name: Restore dependencies
       run: dotnet restore
-#    - name: Build crypto
-#      run: dotnet build crypto/src --no-restore --configuration Release
-#    - name: Build tests
-#      run: dotnet build crypto/test --no-restore
-#    - name: Run tests
-#      run: dotnet test crypto/test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
     - uses: actions/upload-artifact@master
       with:
         name: build-artifacts
         path: crypto/src/bin
-
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
     - name: Publish test results
@@ -50,7 +38,6 @@ jobs:
   publish:
     permissions:
       packages: write
-
     needs: build
     runs-on: windows-latest
     steps:
