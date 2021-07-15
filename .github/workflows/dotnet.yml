@@ -61,7 +61,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@master
       with:
-        name: "build"
+        name: build-artifacts
         path: crypto/src/bin
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
