@@ -7,8 +7,6 @@ on:
     branches: [ netstandard-eddsa ]
 
 permissions:
-  contents: read
-  pull-requests: write
   packages: write
 
 jobs:
@@ -42,6 +40,7 @@ jobs:
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
     - name: Publish
+      if: ${{ github.event_name == 'push' }}
       env:
         token: ${{ secrets.GITHUB_TOKEN }}
       run: |
