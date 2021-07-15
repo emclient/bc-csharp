@@ -24,12 +24,16 @@ jobs:
         dotnet-version: 3.1.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build crypto
-      run: dotnet build crypto/src --no-restore --configuration Release
-    - name: Build tests
-      run: dotnet build crypto/test --no-restore
-    - name: Run tests
-      run: dotnet test crypto/test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+#    - name: Build crypto
+#      run: dotnet build crypto/src --no-restore --configuration Release
+#    - name: Build tests
+#      run: dotnet build crypto/test --no-restore
+#    - name: Run tests
+#      run: dotnet test crypto/test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
     - name: Publish test results
       uses: dorny/test-reporter@v1
       if: success() || failure()
