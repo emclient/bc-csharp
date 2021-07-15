@@ -1,4 +1,4 @@
-name: .NET
+name: Build and publish
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
     branches: [ netstandard-eddsa ]
 
 permissions:
+  contents: read
   packages: write
 
 jobs:
@@ -28,7 +29,7 @@ jobs:
       run: dotnet build crypto/src --no-restore --configuration Release
     - name: Build tests
       run: dotnet build crypto/test --no-restore --configuration Release
-    - name: Test
+    - name: Run tests
       run: dotnet test crypto/test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" --configuration Release
     - name: Publish test results
       uses: dorny/test-reporter@v1
@@ -45,5 +46,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
-        echo Build ${{ env.GitBuildVersion }} ${{ secrets.GITHUB_TOKEN }}
         dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.${{ env.GitBuildVersion }}.nupkg -s github --api-key ${{ secrets.GITHUB_TOKEN }}
