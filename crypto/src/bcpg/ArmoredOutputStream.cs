@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Bcpg
 
         private string          type;
 
-        private static readonly string    nl = Platform.NewLine;
+        private static readonly string    nl = "\r\n";
         private static readonly string    headerStart = "-----BEGIN PGP ";
         private static readonly string    headerTail = "-----";
         private static readonly string    footerStart = "-----END PGP ";
