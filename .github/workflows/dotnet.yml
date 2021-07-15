@@ -33,10 +33,10 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-  tests:
-    needs: build
-    runs-on: windows-latest
-    steps:
+#  tests:
+#    needs: build
+#    runs-on: windows-latest
+#    steps:
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
     - name: Publish test results
@@ -51,7 +51,7 @@ jobs:
     permissions:
       packages: write
 
-    needs: tests
+    needs: build
     runs-on: windows-latest
     steps:
     - name: Pack
