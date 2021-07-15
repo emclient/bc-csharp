@@ -35,7 +35,7 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: build-artifacts
-        path: crypto/src
+        path: crypto/src/bin
 
 #  tests:
 #    needs: build
@@ -59,10 +59,10 @@ jobs:
     needs: build
     runs-on: windows-latest
     steps:
-    - uses: actions/download-artifacts@master
+    - uses: actions/download-artifact@master
       with:
         name: "build"
-        path: crypto/src
+        path: crypto/src/bin
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
     - name: Publish
