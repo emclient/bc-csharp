@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: [self-hosted, windows, X64]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -41,7 +41,7 @@ jobs:
     permissions:
       packages: write
     needs: build
-    runs-on: windows-latest
+    runs-on: [self-hosted, windows, X64]
     steps:
     - uses: actions/checkout@v2
       with:
