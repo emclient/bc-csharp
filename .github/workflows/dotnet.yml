@@ -12,9 +12,6 @@ on:
 jobs:
   build:
 
-    permissions:
-      packages: write
-
     runs-on: windows-latest
 
     steps:
@@ -35,6 +32,11 @@ jobs:
 #      run: dotnet test crypto/test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
     - name: Build
       run: dotnet build --no-restore
+
+  tests:
+    needs: build
+    runs-on: windows-latest
+    steps:
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
     - name: Publish test results
@@ -44,6 +46,14 @@ jobs:
         name: "test results"
         path: "**/TestResults/*.trx"
         reporter: dotnet-trx
+
+  publish:
+    permissions:
+      packages: write
+
+    needs: tests
+    runs-on: windows-latest
+    steps:
     - name: Pack
       run: dotnet pack crypto/src --configuration Release
     - name: Publish
