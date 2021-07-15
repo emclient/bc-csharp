@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ netstandard-eddsa ]
 
-permissions:
-  packages: write
+#permissions:
+#  packages: write
 
 jobs:
   build:
@@ -41,12 +41,12 @@ jobs:
         name: "test results"
         path: "**/TestResults/*.trx"
         reporter: dotnet-trx
-    - name: Pack
-      run: dotnet pack crypto/src --configuration Release
-    - name: Publish
-      if: ${{ github.event_name == 'push' }}
-      env:
-        token: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
-        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.${{ env.GitBuildVersion }}.nupkg -s github --api-key ${{ secrets.GITHUB_TOKEN }}
+#    - name: Pack
+#      run: dotnet pack crypto/src --configuration Release
+#    - name: Publish
+#      if: ${{ github.event_name == 'push' }}
+#      env:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#      run: |
+#        dotnet nuget add source https://nuget.pkg.github.com/emclient/index.json -n github
+#        dotnet nuget push crypto/src/bin/Release/MailClient.BouncyCastle.${{ env.GitBuildVersion }}.nupkg -s github --api-key ${{ secrets.GITHUB_TOKEN }}
